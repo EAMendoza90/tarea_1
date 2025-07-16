@@ -1,0 +1,32 @@
+body{
+    background: rgb(29, 30, 30);
+    color: aliceblue;
+}
+h1{
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    width: 300px;
+    padding: 20px;
+    margin: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+
+.character-name {
+    margin: 15px 0 10px;
+    font-size: 1.5em;
+    color: #333333;
+}
+
