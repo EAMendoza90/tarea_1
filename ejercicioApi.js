@@ -32,11 +32,12 @@ async function cargarApi() {
     console.log({ paginator, paginatoriT: paginator.innerText })
     paginator.innerText = "pagina: " + indiceActual
     const containerNames = document.getElementById('containerNames');
-    data.results.forEach((element, index) => {
+   changesContainer(containerNames, data)
+    /* data.results.forEach((element, index) => {
         const p = document.createElement('p');
         p.innerText = `${index + 1} - ${element.name}`;
         containerNames.appendChild(p);
-    });
+    });*/
 }
 
 
@@ -99,8 +100,9 @@ async function avanzar() {
         endpointSiguiente = null;
         changesContainer(containerNames, data2);
     }
+}
 
-    function changesContainer(containerNames, data2) {
+ function changesContainer(containerNames, data2) {
         while (containerNames.firstChild) {
             containerNames.removeChild(containerNames.firstChild);
         }
@@ -111,4 +113,3 @@ async function avanzar() {
             containerNames.appendChild(p);
         });
     }
-}
