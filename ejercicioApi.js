@@ -52,6 +52,8 @@ async function cargarApi(){
            const paginator = document.getElementById("paginator")
     console.log({paginator, paginatoriT: paginator.innerText})
     indiceActual = 0;
+        endpointSiguiente = data1.info.next
+        endpointAnterior = data1.info.prev
      if (data1.info.next) {
        indiceActual =Number(data1.info.next[data1.info.next.length-1]) - 1
         console.log(`endpoint consumido: `, data1.info.next)
@@ -82,6 +84,8 @@ async function cargarApi(){
            const paginator = document.getElementById("paginator")
     console.log({paginator, paginatoriT: paginator.innerText})
     indiceActual = 0;
+        endpointSiguiente = data2.info.next
+        endpointAnterior = data2.info.prev
      if (data2.info.next) {
        indiceActual =Number(data2.info.next[data2.info.next.length-1]) - 1
         console.log(`endpoint consumido: `, data2.info.next)
