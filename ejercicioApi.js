@@ -62,11 +62,6 @@ async function retroceder() {
     const containerNames = document.getElementById('containerNames');
     data1.info.prev.forEach((element, index) => {
         //index = index + 1
-        console.log({
-            name: element.name,
-            index,
-            NAME: data1.info.prev[index]?.name
-        });
         const p = document.createElement('p');
         p.innerText = `${index + 1} - ${element.name}`;
         containerNames.appendChild(p);
