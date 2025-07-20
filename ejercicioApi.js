@@ -51,13 +51,23 @@ async function cargarApi(){
        const data1 = await response1.json();
            const paginator = document.getElementById("paginator")
     console.log({paginator, paginatoriT: paginator.innerText})
+    indiceActual = 0;
+     if (data1.info.next) {
+       indiceActual =Number(data1.info.next[data1.info.next.length-1]) - 1
+        console.log(`endpoint consumido: `, data1.info.next)
+        console.log(`dataC: `, indiceActual)
+
+    } else if (data1.info.prev) {
+       indiceActual =Number(data1.info.prev[data1.info.prev.length-1]) + 1
+       console.log(`dataD: `, indiceActual)
+    }
     paginator.innerText = "pagina: " + indiceActual
     const containerNames = document.getElementById('containerNames');
     data1.info.prev.forEach((element, index) => {
         //index = index + 1
         console.log({name: element.name,
             index,
-            NAME: data1.results[index]?.name
+            NAME: data1.info.prev[index]?.name
         });
         const p = document.createElement('p');
         p.innerText = `${index + 1} - ${element.name}`;
@@ -71,13 +81,23 @@ async function cargarApi(){
        const data2 = await response2.json();
            const paginator = document.getElementById("paginator")
     console.log({paginator, paginatoriT: paginator.innerText})
+    indiceActual = 0;
+     if (data2.info.next) {
+       indiceActual =Number(data2.info.next[data2.info.next.length-1]) - 1
+        console.log(`endpoint consumido: `, data2.info.next)
+        console.log(`dataC: `, indiceActual)
+
+    } else if (data2.info.prev) {
+       indiceActual =Number(data2.info.prev[data2.info.prev.length-1]) + 1
+       console.log(`dataD: `, indiceActual)
+    }
     paginator.innerText = "pagina: " + indiceActual
     const containerNames = document.getElementById('containerNames');
     data2.info.next.forEach((element, index) => {
         //index = index + 1
         console.log({name: element.name,
             index,
-            NAME: data2.results[index]?.name
+            NAME: data2.info.next[index]?.name
         });
         const p = document.createElement('p');
         p.innerText = `${index + 10} - ${element.name}`;
