@@ -2,7 +2,6 @@ const characters = "https://rickandmortyapi.com/api/character";
 const locations = "https://rickandmortyapi.com/api/location";
 const episodes = "https://rickandmortyapi.com/api/episode";
 
-let indiceActual = 0;
 let endpointSiguiente = "";
 let endpointAnterior = "";
 async function cargarApi() {
@@ -20,6 +19,7 @@ async function cargarApi() {
 
     console.log(`[DEBBUG] F-CARGAR API/data: `, data);
     if (data.info.next) {
+    //TODO: refactorizar(no utilizar la variable indiceActual)
         indiceActual = Number(data.info.next[data.info.next.length - 1]) - 1
         console.log(`endpoint consumido: `, data.info.next)
         console.log(`dataC: `, indiceActual)
@@ -42,8 +42,14 @@ async function cargarApi() {
 
 
 async function retroceder() {
+    if (!endpointAnterior) {
+        return;
+    }
     const response1 = await fetch(endpointAnterior);
+    console.log("[DEBBUG] endpointAnterior: ", endpointAnterior); //null
     const data1 = await response1.json();
+    console.log({DATA: data1})
+    //TODO: resolver el error del paginador, refactorizar, corregir la variable indiceActual (ya no utilizarla)
     const paginator = document.getElementById("paginator")
     console.log({ paginator, paginatoriT: paginator.innerText })
     indiceActual = 0;
@@ -60,12 +66,7 @@ async function retroceder() {
     }
     paginator.innerText = "pagina: " + indiceActual
     const containerNames = document.getElementById('containerNames');
-    data1.info.prev.forEach((element, index) => {
-        //index = index + 1
-        const p = document.createElement('p');
-        p.innerText = `${index + 1} - ${element.name}`;
-        containerNames.appendChild(p);
-    });
+    changesContainer(containerNames, data1)
     console.log("[debugg] f-retroceder: ", endpointAnterior)
 }
 /*
