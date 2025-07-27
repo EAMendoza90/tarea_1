@@ -20,17 +20,17 @@ async function cargarApi() {
     console.log(`[DEBBUG] F-CARGAR API/data: `, data);
     if (data.info.next) {
     //TODO: refactorizar(no utilizar la variable indiceActual)
-        indiceActual = Number(data.info.next[data.info.next.length - 1]) - 1
+        Number(data.info.next[data.info.next.length - 1]) - 1
         console.log(`endpoint consumido: `, data.info.next)
         console.log(`dataC: `, indiceActual)
 
     } else if (data.info.prev) {
-        indiceActual = Number(data.info.prev[data.info.prev.length - 1]) + 1
+        Number(data.info.prev[data.info.prev.length - 1]) + 1
         console.log(`dataD: `, indiceActual)
     }
     const paginator = document.getElementById("paginator")
     console.log({ paginator, paginatoriT: paginator.innerText })
-    paginator.innerText = "pagina: " + indiceActual
+    paginator.innerText = "pagina: " + (Number(data.info.prev[data.info.prev.length - 1]) + 1)
     const containerNames = document.getElementById('containerNames');
    changesContainer(containerNames, data)
     /* data.results.forEach((element, index) => {
