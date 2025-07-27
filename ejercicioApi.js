@@ -42,6 +42,7 @@ async function retroceder() {
     console.log({ paginator, paginatoriT: paginator.innerText })
     endpointSiguiente = data1.info.next
     endpointAnterior = data1.info.prev
+    const containerNames = document.getElementById('containerNames');
     if (data1.info.next) {
             if (data1.info.next[data1.info.next.length - 2] == '=') {
             paginator.innerText = "pagina: " + (Number(data1.info.next[data1.info.next.length - 1]) - 1)
@@ -53,12 +54,9 @@ async function retroceder() {
         console.log(`dataC: `,  (Number(data1.info.next[data1.info.next.length - 1]) - 1) )
 
     } else if (data1.info.prev) {
-        data1.info.prev= Number(data1.info.prev[data1.info.prev.length - 1]) + 1
-        console.log(`dataD: `,  (Number(data1.info.next[data1.info.next.length - 1]) - 1))
+        paginator.innerText = "pagina: " + (Number(data1.info.prev[data1.info.prev.length - 1]) + 1)
+        console.log(`dataD: `,  (Number(data1.info.prev[data1.info.prev.length - 1]) - 1))
     }
-    paginator.innerText = "pagina: " +  (Number(data1.info.next[data1.info.next.length - 2] + data1.info.next[data1.info.next.length - 1]))
-    const containerNames = document.getElementById('containerNames');
-    changesContainer(containerNames, data1)
     console.log("[debugg] f-retroceder: ", endpointAnterior)
 }
 /*
