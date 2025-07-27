@@ -18,7 +18,7 @@ async function cargarApi() {
     console.log({ endpointSiguiente, endpointAnterior })
 
     console.log(`[DEBBUG] F-CARGAR API/data: `, data);
-    paginator.innerText = "pagina: " + 1;
+    paginator.innerText = "pagina: 1";
     const containerNames = document.getElementById('containerNames');
    changesContainer(containerNames, data)
     /* data.results.forEach((element, index) => {
@@ -80,8 +80,12 @@ async function avanzar() {
         }
         changesContainer(containerNames, data2);
     } else {
+        if(endpointSiguiente){
+            paginator.innerText = "pagina: " + (Number(data2.info.next[data2.info.next.length - 2] + data2.info.next[data2.info.next.length - 1]) - 1)
+        } else {
         endpointSiguiente = null;
         changesContainer(containerNames, data2);
+        }
     }
 }
 
