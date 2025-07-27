@@ -43,15 +43,20 @@ async function retroceder() {
     endpointSiguiente = data1.info.next
     endpointAnterior = data1.info.prev
     if (data1.info.next) {
-        Number(data1.info.next[data1.info.next.length - 1]) - 1
+            if (data1.info.next[data1.info.next.length - 2] == '=') {
+            paginator.innerText = "pagina: " + (Number(data1.info.next[data1.info.next.length - 1]) - 1)
+        } else {
+            paginator.innerText = "pagina: " + (Number(data1.info.next[data1.info.next.length - 2] + data1.info.next[data1.info.next.length - 1]) - 1)
+        }
+        changesContainer(containerNames, data1);
         console.log(`endpoint consumido: `, data1.info.next)
         console.log(`dataC: `,  (Number(data1.info.next[data1.info.next.length - 1]) - 1) )
 
     } else if (data1.info.prev) {
-        Number(data1.info.prev[data1.info.prev.length - 1]) + 1
+        data1.info.prev= Number(data1.info.prev[data1.info.prev.length - 1]) + 1
         console.log(`dataD: `,  (Number(data1.info.next[data1.info.next.length - 1]) - 1))
     }
-    paginator.innerText = "pagina: " +  (Number(data1.info.next[data1.info.next.length - 1]) - 1)
+    paginator.innerText = "pagina: " +  (Number(data1.info.next[data1.info.next.length - 2] + data1.info.next[data1.info.next.length - 1]))
     const containerNames = document.getElementById('containerNames');
     changesContainer(containerNames, data1)
     console.log("[debugg] f-retroceder: ", endpointAnterior)
