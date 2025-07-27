@@ -80,12 +80,10 @@ async function avanzar() {
         }
         changesContainer(containerNames, data2);
     } else {
-        if(endpointSiguiente == data2.info.next){
-            paginator.innerText = "pagina: " + (Number(data2.info.next[data2.info.next.length - 2] + data2.info.next[data2.info.next.length - 1]) - 1)
-        } else {
+        console.log(endpointSiguiente)
+         paginator.innerText = "pagina: " + endpointSiguiente
         endpointSiguiente = null;
         changesContainer(containerNames, data2);
-        }
     }
 }
 
