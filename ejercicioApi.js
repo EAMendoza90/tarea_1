@@ -33,6 +33,7 @@ async function cargarApi() {
     paginator.innerText = "pagina: " + (Number(data.info.prev[data.info.prev.length - 1]) + 1)
     const containerNames = document.getElementById('containerNames');
    changesContainer(containerNames, data)
+   uploadImages(containerNames, data.results.image)
     /* data.results.forEach((element, index) => {
         const p = document.createElement('p');
         p.innerText = `${index + 1} - ${element.name}`;
