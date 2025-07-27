@@ -72,10 +72,10 @@ async function avanzar() {
     const data2 = await response2.json();
     const paginator = document.getElementById("paginator")
     const containerNames = document.getElementById('containerNames');
+    endpointAnterior = data2.info.prev
 
     if (data2.info.next) {
         endpointSiguiente = data2.info.next
-        endpointAnterior = data2.info.prev
         if (data2.info.next[data2.info.next.length - 2] == '=') {
             paginator.innerText = "pagina: " + (Number(data2.info.next[data2.info.next.length - 1]) - 1)
         } else {
