@@ -22,7 +22,7 @@ async function cargarApi() {
     //TODO: refactorizar(no utilizar la variable indiceActual)
         Number(data.info.next[data.info.next.length - 1]) - 1
         console.log(`endpoint consumido: `, data.info.next)
-        console.log(`dataC: `,  (Number(data.info.next[data1.info.next.length - 1]) - 1))
+        console.log(`dataC: `,  (Number(data.info.next[data.info.next.length - 1]) - 1))
 
     } else if (data.info.prev) {
         Number(data.info.prev[data.info.prev.length - 1]) + 1
