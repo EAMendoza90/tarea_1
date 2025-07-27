@@ -22,11 +22,11 @@ async function cargarApi() {
     //TODO: refactorizar(no utilizar la variable indiceActual)
         Number(data.info.next[data.info.next.length - 1]) - 1
         console.log(`endpoint consumido: `, data.info.next)
-        console.log(`dataC: `, indiceActual)
+        console.log(`dataC: `,  (Number(data.info.next[data1.info.next.length - 1]) - 1))
 
     } else if (data.info.prev) {
         Number(data.info.prev[data.info.prev.length - 1]) + 1
-        console.log(`dataD: `, indiceActual)
+        console.log(`dataD: `,  (Number(data.info.next[data1.info.next.length - 1]) - 1))
     }
     const paginator = document.getElementById("paginator")
     console.log({ paginator, paginatoriT: paginator.innerText })
@@ -52,19 +52,18 @@ async function retroceder() {
     //TODO: resolver el error del paginador, refactorizar, corregir la variable indiceActual (ya no utilizarla)
     const paginator = document.getElementById("paginator")
     console.log({ paginator, paginatoriT: paginator.innerText })
-    indiceActual = 0;
     endpointSiguiente = data1.info.next
     endpointAnterior = data1.info.prev
     if (data1.info.next) {
-        indiceActual = Number(data1.info.next[data1.info.next.length - 1]) - 1
+        Number(data1.info.next[data1.info.next.length - 1]) - 1
         console.log(`endpoint consumido: `, data1.info.next)
-        console.log(`dataC: `, indiceActual)
+        console.log(`dataC: `,  (Number(data1.info.next[data1.info.next.length - 1]) - 1) )
 
     } else if (data1.info.prev) {
-        indiceActual = Number(data1.info.prev[data1.info.prev.length - 1]) + 1
-        console.log(`dataD: `, indiceActual)
+        Number(data1.info.prev[data1.info.prev.length - 1]) + 1
+        console.log(`dataD: `,  (Number(data1.info.next[data1.info.next.length - 1]) - 1))
     }
-    paginator.innerText = "pagina: " + indiceActual
+    paginator.innerText = "pagina: " +  (Number(data1.info.next[data1.info.next.length - 1]) - 1)
     const containerNames = document.getElementById('containerNames');
     changesContainer(containerNames, data1)
     console.log("[debugg] f-retroceder: ", endpointAnterior)
@@ -107,5 +106,17 @@ async function avanzar() {
             const p = document.createElement('p');
             p.innerText = `${element.id} - ${element.name}`;
             containerNames.appendChild(p);
+        });
+    }
+
+     function uploadImages(containerNames, data2) {
+        while (containerNames.firstChild) {
+            containerNames.removeChild(containerNames.firstChild);
+        }
+
+        data2.results.image.forEach((element) => {
+            const imagen = document.createElement('img');
+            imagen.src= data2.results.image
+            containerNames.appendChild(imagen);
         });
     }
