@@ -26,7 +26,7 @@ async function cargarApi() {
 
     } else if (data.info.prev) {
         Number(data.info.prev[data.info.prev.length - 1]) + 1
-        console.log(`dataD: `,  (Number(data.info.next[data1.info.next.length - 1]) - 1))
+        console.log(`dataD: `,  (Number(data.info.next[data.info.next.length - 1]) - 1))
     }
     const paginator = document.getElementById("paginator")
     console.log({ paginator, paginatoriT: paginator.innerText })
