@@ -80,7 +80,7 @@ async function avanzar() {
         }
         changesContainer(containerNames, data2);
     } else {
-         paginator.innerText = "pagina: 42"
+         paginator.innerText = "pagina: " + (endpointSiguiente[endpointSiguiente.length - 2] + endpointSiguiente[endpointSiguiente.length - 1])
         endpointSiguiente = null;
         changesContainer(containerNames, data2);
     }
