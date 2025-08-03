@@ -73,6 +73,10 @@ function changesContainer(containerNames, data2) {
         p.innerText = `${element.id} - ${element.name}`;
         containerNames.appendChild(p);
     });
+
+    const button = document.createElement("button")
+    const card = document.createElement("div");
+        card.classList.add("card"); 
 }
 
 function uploadImages(containerNames, data2) {
