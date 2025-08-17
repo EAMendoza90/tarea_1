@@ -1,7 +1,7 @@
 const characters = "https://rickandmortyapi.com/api/character";
 const locations = "https://rickandmortyapi.com/api/location";
 const episodes = "https://rickandmortyapi.com/api/episode";
-
+let clickEpisodes = 0;
 let endpointSiguiente = "";
 let endpointAnterior = "";
 async function cargarApi() {
@@ -11,21 +11,22 @@ async function cargarApi() {
             'Content-Type': 'application/json'
         }
     });
-
+    clickEpisodes= 0;
     const data = await response.json();
     endpointSiguiente = data.info.next
     endpointAnterior = data.info.prev
     console.log({ endpointSiguiente, endpointAnterior })
 
     console.log(`[DEBBUG] F-CARGAR API/data: `, data);
-    paginator.innerText = "pagina: 1";
+    const retroceso = document.getElementById("retroceso");
+    retroceso.style.display= "flex";
+    const next = document.getElementById("next");
+    next.style.display= "flex";
+    const paginator = document.getElementById("paginator");
+    paginator.innerText = "pagina: 1"
+    paginator.style.display= "block";
     const containerNames = document.getElementById('containerNames');
     changesContainer(containerNames, data)
-    /* data.results.forEach((element, index) => {
-        const p = document.createElement('p');
-        p.innerText = `${index + 1} - ${element.name}`;
-        containerNames.appendChild(p);
-    });*/
 }
 
 async function retroceder() {
@@ -64,29 +65,87 @@ async function avanzar() {
 }
 
 function changesContainer(containerNames, data2) {
-    while (containerNames.firstChild) {
-        containerNames.removeChild(containerNames.firstChild);
-    }
+  deleteContentContainerNames(containerNames)
 
     data2.results.forEach((element) => {
         const p = document.createElement('p');
+        p.classList.add("pc")
+        p.style.cursor= "pointer";
+        p.addEventListener("click", () => infoCharacter(element, containerNames))
         p.innerText = `${element.id} - ${element.name}`;
         containerNames.appendChild(p);
     });
-
-    const button = document.createElement("button")
-    const card = document.createElement("div");
-        card.classList.add("card"); 
+}
+function infoCharacter (element, container) {
+    deleteContentContainerNames(container)
+    const retroceso = document.getElementById("retroceso");
+    retroceso.style.display= "none";
+     const next = document.getElementById("next");
+    next.style.display= "none";
+    const paginator = document.getElementById("paginator");
+    paginator.style.display= "none";
+    console.log({element})
+    createCard(container, element)
 }
 
-function uploadImages(containerNames, data2) {
-    while (containerNames.firstChild) {
-        containerNames.removeChild(containerNames.firstChild);
-    }
+function createCard (container, element) {
+    const hTitle = document.createElement("h1")
+    hTitle.innerText = "Descripcion de personaje"
+    const div = document.createElement("div")
+    div.classList.add("card");
+        const img = document.createElement("img");
+        img.addEventListener("click", () => mostrarDetallePersonajeEpisodio(element, container))
+    img.src= element.image
+    img.classList.add("img-card")
+    const p = document.createElement("p")
+    p.innerText = element.name
+    const p2 = document.createElement("p2")
+    p2.innerText = element.gender
+    const p3 = document.createElement("p3")
+    p3.innerText = element.species
+    const p4 = document.createElement("p4")
+    p4.innerText = element.status
+    p.classList.add("p-c")
+    div.appendChild(img)
+    div.appendChild(p)
+    div.appendChild(p2)
+    div.appendChild(p3)
+    div.appendChild(p4)
+    container.appendChild(hTitle)
+    container.appendChild(div)
+}
 
-    data2.results.image.forEach((element) => {
-        const imagen = document.createElement('img');
-        imagen.src = data2.results.image
-        containerNames.appendChild(imagen);
-    });
+function deleteContentContainerNames (container) {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild)
+    }
+}
+
+async function mostrarDetallePersonajeEpisodio (element, container) {
+if (!clickEpisodes) {
+    clickEpisodes++;
+        console.log("DEBBUG URL: ", element.episode[0])
+    const response3 = await fetch(element.episode[0]);
+    console.log("RES: ", response3);
+    const data3 = await response3.json();
+    console.log("DATA3: ", data3)
+    console.log(JSON.stringify(data3, null, 2))
+    const p = document.createElement("p")
+    p.innerText = `la fecha del episodio es ${data3.air_date} y el nombre del episodio es ${data3.name}`
+   container.appendChild(p);
+} else if (clickEpisodes > 1) {
+    clickEpisodes++;
+ const p = document.createElement("p")
+    p.innerText = `la fecha del episodio es ${data3.air_date} y el nombre del episodio es ${data3.name}`
+   container.appendChild(p);
+}
+}
+
+function BuscardorPersonajes () {
+    const button = document.getElementById("searchPersonaje")
+    button.addEventListener("click", BuscardorPersonajes)
+    const input = document.getElementById("inputCharacter")
+    input.addEventListener("input", BuscardorPersonajes)
+    const character = input.value;
+    console.log("buscando personaje: ", character)
 }

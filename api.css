@@ -4,6 +4,11 @@ body{
 }
 p{
     text-align: center;
+    color: red;
+}
+
+.pc {
+    color: aqua;
 }
 
 * {
@@ -24,9 +29,29 @@ p{
 }
 
 
-.paginator {
+#paginator {
     margin: 15px 0 10px;
     font-size: 1.5em;
-    color: #333333;
+    color: #e0cc14;
+    display: block;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.img-card {
+    width: 300px;
+    box-shadow: 5px 5px 5px white;
+    border-radius: 5px;
+}
+
+.p-c {
+    margin-top: 10px;
 }
 

@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="api.css">
 </head>
 <body>
-    <button onclick="retroceder()">anterior</button>
+    <button id="retroceso" onclick="retroceder()">anterior</button>
     <button onclick="cargarApi()">cargar primeros personajes</button>
-    <button onclick="avanzar()">siguiente</button>
+    <button id="next" onclick="avanzar()">siguiente</button>
+    <form action="/buscar">
+        <input  id="inputCharacter" type="text" name="personaje" placeholder="ej. morty" oninput="BuscadorPersonajes()">
+        <button id="searchPersonaje"  type="submit" onclick="BuscadorPersonajes()">Buscar</button>
+    </form>
     <div id="containerNames">
-        <button onclick= "uploadImages()"><p></p></button>
     </div>
-    <div>
-        <p id="paginator">pagina</p>
+    <div id="containerPaginator">
+        <p id="paginator"></p>
     </div>
     <script src="ejercicioApi.js"></script>
 
