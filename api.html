@@ -10,7 +10,7 @@
     <button id="retroceso" onclick="retroceder()">anterior</button>
     <button onclick="cargarApi()">cargar primeros personajes</button>
     <button id="next" onclick="avanzar()">siguiente</button>
-    <form action="/buscar">
+    <form id="formulario" action="/buscar">
         <input  id="inputCharacter" type="text" name="personaje" placeholder="ej. morty" oninput="BuscadorPersonajes()">
         <button id="searchPersonaje"  type="submit" onclick="BuscadorPersonajes()">Buscar</button>
     </form>

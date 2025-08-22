@@ -122,30 +122,24 @@ function deleteContentContainerNames (container) {
 }
 
 async function mostrarDetallePersonajeEpisodio (element, container) {
-if (!clickEpisodes) {
-    clickEpisodes++;
-        console.log("DEBBUG URL: ", element.episode[0])
-    const response3 = await fetch(element.episode[0]);
-    console.log("RES: ", response3);
+    if (element.episode[clickEpisodes] == undefined) return;
+    console.log("DEBBUG URL: ", element.episode[clickEpisodes])
+    const response3 = await fetch(element.episode[clickEpisodes]);
+      console.log("RES: ", response3);
     const data3 = await response3.json();
     console.log("DATA3: ", data3)
     console.log(JSON.stringify(data3, null, 2))
+    clickEpisodes++;
     const p = document.createElement("p")
     p.innerText = `la fecha del episodio es ${data3.air_date} y el nombre del episodio es ${data3.name}`
    container.appendChild(p);
-} else if (clickEpisodes > 1) {
-    clickEpisodes++;
- const p = document.createElement("p")
-    p.innerText = `la fecha del episodio es ${data3.air_date} y el nombre del episodio es ${data3.name}`
-   container.appendChild(p);
-}
+
 }
 
 function BuscardorPersonajes () {
     const button = document.getElementById("searchPersonaje")
     button.addEventListener("click", BuscardorPersonajes)
-    const input = document.getElementById("inputCharacter")
+    const input = document.getElementById("inputCharacter").value
     input.addEventListener("input", BuscardorPersonajes)
-    const character = input.value;
-    console.log("buscando personaje: ", character)
+    console.log("buscando personaje: ", input)
 }
